@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">CashControl</string>
     <string name="income">Дохід</string>
-    <string name="expanses">Витрати</string>
+    <string name="expanses">Витрата</string>
     <string name="settings">Налаштування</string>
     <string name="statistics">Статистика</string>
+
 </resources>

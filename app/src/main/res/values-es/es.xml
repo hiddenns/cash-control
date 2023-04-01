@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="income">ingresos</string>
+    <string name="expanses">extensiones</string>
+    <string name="settings">ajustes</string>
+    <string name="statistics">estadísticas</string>
+</resources>
