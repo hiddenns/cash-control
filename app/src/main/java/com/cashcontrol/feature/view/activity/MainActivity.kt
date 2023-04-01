@@ -2,6 +2,7 @@ package com.cashcontrol.feature.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.cashcontrol.databinding.ActivityMainBinding
 import com.cashcontrol.feature.view.PagerAdapter
 import org.kodein.di.DI
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity(), DIAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
