@@ -3,38 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/incomeFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/incomeFragment"
-        android:name="com.cashcontrol.feature.view.income.IncomeFragment"
-        android:label="incomeFragment"
-        tools:layout="@layout/income_fragment">
-
-        <action
-            android:id="@+id/action_incomeFragment_to_outlayFragment"
-            app:destination="@+id/outlayFragment"/>
+        android:id="@+id/mainFragment"
+        android:name="com.cashcontrol.feature.view.activity.MainFragment"
+        android:label="mainFragment"
+        tools:layout="@layout/fragment_main">
     </fragment>
 
     <fragment
-        android:id="@+id/outlayFragment"
-        android:name="com.cashcontrol.feature.view.outlay.OutlayFragment"
-        android:label="outlayFragment"
-        tools:layout="@layout/outlay_fragment">
+        android:id="@+id/settingsFragment"
+        android:name="com.cashcontrol.feature.view.settings.SettingsFragment"
+        android:label="settingsFragment"
+        tools:layout="@layout/fragment_settings">
+    </fragment>
 
-        <action
-            android:id="@+id/action_outlayFragment_to_incomeFragment"
-            app:destination="@+id/incomeFragment"/>
-
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.cashcontrol.feature.view.statistics.StatisticsFragment"
+        android:label="statisticsFragment"
+        tools:layout="@layout/fragment_statistics">
     </fragment>
 
     <action
-        android:id="@+id/global_to_incomeFragment"
-        app:destination="@+id/incomeFragment"/>
+        android:id="@+id/global_to_mainFragment"
+        app:destination="@+id/mainFragment"/>
 
-    <action
-        android:id="@+id/global_to_outlayFragment"
-        app:destination="@+id/outlayFragment"/>
 
 
 

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CashControl</string>
+    <string name="income">Income</string>
+    <string name="expanses">Expanses</string>
 </resources>
