@@ -62,8 +62,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             }
         })
         binding.textView2.setOnClickListener {
-            binding.svParent.smoothScrollTo(FIRST_POSITION, binding.svParent.top)
             isStateDelayScrolled = true
+            binding.svParent.smoothScrollTo(FIRST_POSITION, binding.svParent.top)
+            binding.rvTransactionList.smoothScrollToPosition(FIRST_POSITION)
             lifecycleScope.launch {
                 delay(MANY_TOUCH_DELAY)
                 isStateDelayScrolled = false
