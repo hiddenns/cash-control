@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.cashcontrol.databinding.ActivityMainBinding
-import com.cashcontrol.feature.view.PagerAdapter
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.closestDI
@@ -24,8 +23,6 @@ class MainActivity : AppCompatActivity(), DIAware {
 
         with(binding.viewPager) {
             adapter = PagerAdapter(this@MainActivity)
-            setCurrentItem(1, false)
-            adapter = adapter
             setCurrentItem(1, false)
         }
 

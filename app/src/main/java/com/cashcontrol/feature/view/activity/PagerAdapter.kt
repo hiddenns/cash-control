@@ -1,9 +1,8 @@
-package com.cashcontrol.feature.view
+package com.cashcontrol.feature.view.activity
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.cashcontrol.feature.view.activity.MainActivity
-import com.cashcontrol.feature.view.activity.MainFragment
+import com.cashcontrol.feature.view.main.MainFragment
 import com.cashcontrol.feature.view.settings.SettingsFragment
 import com.cashcontrol.feature.view.statistics.StatisticsFragment
 
