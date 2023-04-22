@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -14,29 +15,66 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="@string/expanses"
-            app:layout_constraintBottom_toTopOf="@+id/rv_transaction_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
+            android:id="@+id/top_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="230dp"
-            android:text="@string/expanses"
-            android:textAlignment="center"
-            android:padding="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/rv_transaction_list"
+
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/general_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Wallet"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wallet_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/top_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_margin="16dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/wallet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="card">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/expanses_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_margin="8dp"
+            app:layout_constraintTop_toBottomOf="@id/wallet_container" />
+
+        <TextView
+            android:id="@+id/expanses_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/expanses"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rv_transaction_list"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_transaction_list"
@@ -44,9 +82,11 @@
             android:layout_height="wrap_content"
             android:background="#666"
             android:padding="20dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_cards"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

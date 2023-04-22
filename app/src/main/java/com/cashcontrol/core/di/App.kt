@@ -7,7 +7,7 @@ import org.kodein.di.*
 
 class App : Application(), DIAware {
     override val di = DI.lazy {
-        //import(AppModule.get(this@App))
+        import(AppModule.get(this@App))
     }
 
     override val diTrigger = DITrigger()
@@ -22,3 +22,4 @@ class App : Application(), DIAware {
 //        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 //    }
 }
+

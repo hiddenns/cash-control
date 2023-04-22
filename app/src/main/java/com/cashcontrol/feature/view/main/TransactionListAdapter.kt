@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cashcontrol.R
+import com.cashcontrol.data.model.Category
+import com.cashcontrol.data.model.Transaction
 
-class TransactionListAdapter(private val list: List<String>) :
+class TransactionListAdapter(private val list: MutableList<Transaction>) :
     RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
@@ -18,18 +20,14 @@ class TransactionListAdapter(private val list: List<String>) :
     }
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-        holder.text.text = mock[position]
+        holder.text.text = list[position].name
     }
 
-    override fun getItemCount() = mock.size
+    override fun getItemCount() = list.size
 
-
-    companion object {
-        private val mock:List<String> = listOf("first","second","third", "four", "five", "six", "seven", "nine", "ten","first","second","third", "four", "five", "six", "seven", "nine", "ten",
-            "first","second","third", "four", "five", "six", "seven", "nine",
-            "ten", "first","second","third", "four", "five", "six", "seven", "nine", "ten").map {
-                item -> "$item transaction"
-        }
+    fun updateData(transactionList: List<Transaction>) {
+        list.addAll(transactionList)
+        notifyItemRangeInserted(list.size - 1, list.size + transactionList.size - 2)
     }
 
     class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

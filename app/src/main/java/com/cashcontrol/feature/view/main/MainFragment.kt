@@ -10,30 +10,60 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.SnapHelper
+import com.cashcontrol.data.model.Category
+import com.cashcontrol.data.model.Transaction
 import com.cashcontrol.databinding.FragmentMainBinding
 import com.cashcontrol.domain.base.BaseFragment
+import com.cashcontrol.domain.extenstion.observe
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.kodein.di.instance
+import java.util.*
 
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
-    var isStateDelayScrolled = false
-    var isStateDelayManyTouchDown = false
+    private var isStateDelayScrolled = false
+    private var isStateDelayManyTouchDown = false
+
+
+    private val viewModel: MainViewModel by instance()
+
+    private val transactionListAdapter = TransactionListAdapter(mutableListOf())
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.svParent.isVerticalScrollBarEnabled = false
-        binding.svParent.setOnTouchListener { _, _ -> true }
+        with(binding) {
+            svParent.isVerticalScrollBarEnabled = false
+            svParent.setOnTouchListener { _, _ -> true }
+            val snapHelperCards: SnapHelper = LinearSnapHelper()
+            val snapHelperTransactions: SnapHelper = LinearSnapHelper()
 
-        binding.rvTransactionList.layoutManager = LinearLayoutManager(context)
-        binding.rvTransactionList.adapter = TransactionListAdapter(emptyList())
+            rvCards.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            rvCards.adapter = ActionTypeAdapter()
+            snapHelperCards.attachToRecyclerView(rvCards)
 
-        val snapHelper: SnapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(binding.rvTransactionList)
+            rvTransactionList.layoutManager = LinearLayoutManager(context)
+            rvTransactionList.adapter = transactionListAdapter
+            snapHelperTransactions.attachToRecyclerView(rvTransactionList)
+        }
 
         setListeners()
+        setupObservers()
+    }
+
+    private fun setupObservers() {
+        with(viewModel) {
+            categories.observe(lifecycleScope) { list ->
+                transactionListAdapter.updateData(
+                    list.flatMap {
+                        it.transactions
+                    })
+            }
+
+        }
     }
 
     private fun setListeners() {
@@ -47,7 +77,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                     //scroll up
                     if (dy > COORDINATE_ONE && currentItemPosition > SECOND_POSITION && !isStateDelayManyTouchDown) {
                         isStateDelayManyTouchDown = true
-                        animate(binding.svParent, binding.textView2.top)
+                        animate(binding.svParent, binding.expansesText.top)
                         lifecycleScope.launch {
                             delay(MANY_TOUCH_DELAY)
                             isStateDelayManyTouchDown = false
@@ -66,7 +96,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             }
         })
 
-        binding.textView2.setOnClickListener {
+        binding.expansesText.setOnClickListener {
             isStateDelayScrolled = true
             animate(binding.svParent, binding.svParent.top)
             binding.rvTransactionList.smoothScrollToPosition(FIRST_POSITION)
@@ -77,8 +107,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         }
     }
 
-    private fun animate(view: View, positionY:Int, propertyName:String = "scrollY"){
-        ObjectAnimator.ofInt(view, propertyName,  positionY).setDuration(ANIMATION_DELAY).start()
+    private fun animate(view: View, positionY: Int, propertyName: String = "scrollY") {
+        ObjectAnimator.ofInt(view, propertyName, positionY).setDuration(ANIMATION_DELAY).start()
     }
 
 

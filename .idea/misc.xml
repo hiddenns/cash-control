@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/drawable/view_holder_transaction.xml" value="0.1" />
+        <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/layout/action_viewholder.xml" value="0.38095238095238093" />
         <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/layout/fragment_main.xml" value="0.128" />
+        <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/layout/fragment_main.xml" value="0.2" />
         <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/layout/fragment_statistics.xml" value="0.1" />
         <entry key="..\:/Users/eigon/AndroidStudioProjects/CashControl2/app/src/main/res/layout/income_fragment.xml" value="0.22826086956521738" />
