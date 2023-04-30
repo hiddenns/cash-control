@@ -10,17 +10,18 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.SnapHelper
-import com.cashcontrol.data.model.Category
+import com.cashcontrol.R
 import com.cashcontrol.data.model.Transaction
 import com.cashcontrol.databinding.FragmentMainBinding
 import com.cashcontrol.domain.base.BaseFragment
-import com.cashcontrol.domain.extenstion.observe
+import com.cashcontrol.feature.main.dialogs.ActionBottomSheetDialog
+import com.cashcontrol.feature.main.dialogs.ActionDialogSubmitCallBack
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.kodein.di.instance
-import java.util.*
 
-class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
+class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate),
+    ActionDialogSubmitCallBack {
 
     private var isStateDelayScrolled = false
     private var isStateDelayManyTouchDown = false
@@ -29,6 +30,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private val viewModel: MainViewModel by instance()
 
     private val transactionListAdapter = TransactionListAdapter(mutableListOf())
+    private val actionTypeAdapter = ActionTypeAdapter(mutableListOf()) { position ->
+        callActionDialog(position)
+    }
+
+    private lateinit var actionBottomSheetDialog: ActionBottomSheetDialog
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,26 +48,29 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             val snapHelperTransactions: SnapHelper = LinearSnapHelper()
 
             rvCards.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            rvCards.adapter = ActionTypeAdapter()
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            rvCards.adapter = actionTypeAdapter
             snapHelperCards.attachToRecyclerView(rvCards)
 
             rvTransactionList.layoutManager = LinearLayoutManager(context)
             rvTransactionList.adapter = transactionListAdapter
             snapHelperTransactions.attachToRecyclerView(rvTransactionList)
         }
-
+        actionBottomSheetDialog = ActionBottomSheetDialog(requireContext())
+        actionBottomSheetDialog.setContentView(R.layout.action_dialog)
+        actionBottomSheetDialog.submitCallBack = this
         setListeners()
         setupObservers()
     }
 
     private fun setupObservers() {
         with(viewModel) {
-            categories.observe(lifecycleScope) { list ->
-                transactionListAdapter.updateData(
-                    list.flatMap {
-                        it.transactions
-                    })
+            transactions.observe { data ->
+                transactionListAdapter.updateData(data)
+            }
+
+            actions.observe { actions ->
+                actionTypeAdapter.updateData(actions)
             }
 
         }
@@ -105,6 +115,26 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                 isStateDelayScrolled = false
             }
         }
+
+        binding.rvCards
+    }
+
+    private fun callActionDialog(position: Int) {
+        when (position) {
+            EXPANSES_ACTION_POSITION -> {
+                actionBottomSheetDialog.tvTitle?.text =
+                    context?.getText(R.string.expanses)
+            }
+            INCOME_ACTION_POSITION -> {
+                actionBottomSheetDialog.tvTitle?.text =
+                    context?.getText(R.string.income)
+            }
+            else -> {
+                throw IllegalArgumentException("cannot find action type with position: $position")
+            }
+        }
+        actionBottomSheetDialog.show()
+
     }
 
     private fun animate(view: View, positionY: Int, propertyName: String = "scrollY") {
@@ -121,5 +151,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
         private const val MANY_TOUCH_DELAY = 150L
         private const val ANIMATION_DELAY = 190L
+
+        private const val EXPANSES_ACTION_POSITION = 0
+        private const val INCOME_ACTION_POSITION = 1
     }
+
+    override fun onClose(transaction: Transaction) {
+        viewModel.addTransaction(transaction)
+    }
+
 }

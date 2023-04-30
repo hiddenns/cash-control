@@ -5,7 +5,7 @@ import com.cashcontrol.data.model.Transaction
 interface TransactionsRepository {
 
     fun getAllTransactions(categoryId: Long = DEFAULT_CATEGORY_ID) : List<Transaction>
-    fun addTransaction(categoryId: Long): Transaction
+    fun addTransaction(transaction: Transaction): Transaction
     fun removeTransaction(categoryId: Long): Transaction
 
 

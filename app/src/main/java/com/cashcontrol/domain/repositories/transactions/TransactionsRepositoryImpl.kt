@@ -7,8 +7,8 @@ class TransactionsRepositoryImpl : TransactionsRepository {
         TODO("Not yet implemented")
     }
 
-    override fun addTransaction(categoryId: Long): Transaction {
-        TODO("Not yet implemented")
+    override fun addTransaction(transaction: Transaction): Transaction {
+        return transaction
     }
 
     override fun removeTransaction(categoryId: Long): Transaction {

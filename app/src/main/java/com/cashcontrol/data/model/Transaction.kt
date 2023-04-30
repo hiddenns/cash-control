@@ -6,5 +6,5 @@ data class Transaction(
     val sum: Int,
     val date: Int,
     val description: String,
-    val category: Category
+    val categoryId: Long
 )

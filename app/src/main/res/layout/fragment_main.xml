@@ -58,7 +58,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cards"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
+            android:maxHeight="400dp"
             app:layout_constraintBottom_toTopOf="@id/expanses_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -7,6 +7,8 @@ class GetCategoriesInteract(
     val categoriesRepository: CategoriesRepository
 ) {
 
-    suspend fun getAllCategories() = categoriesRepository.getAllCategories()
+    fun getAllCategories() = categoriesRepository.getAllCategories()
+
+    fun addCategory(category: Category) = categoriesRepository.addCategory(category)
 
 }

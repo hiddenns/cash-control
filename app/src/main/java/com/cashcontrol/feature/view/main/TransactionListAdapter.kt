@@ -27,7 +27,8 @@ class TransactionListAdapter(private val list: MutableList<Transaction>) :
 
     fun updateData(transactionList: List<Transaction>) {
         list.addAll(transactionList)
-        notifyItemRangeInserted(list.size - 1, list.size + transactionList.size - 2)
+//        notifyItemRangeInserted(list.size - 1, list.size + transactionList.size - 2)
+        notifyDataSetChanged()
     }
 
     class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

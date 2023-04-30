@@ -6,51 +6,66 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.cashcontrol.R
-import com.cashcontrol.data.model.Action
-import com.cashcontrol.data.model.ActionTypes
 
-class ActionTypeAdapter : RecyclerView.Adapter<ActionTypeAdapter.ActionTypeViewHolder>() {
+class ActionTypeAdapter(
+    private var actionTypeList: MutableList<com.cashcontrol.data.room.entity.PaymentMethod>,
+    private val clickCallBack: (position: Int) -> Unit
+) : RecyclerView.Adapter<ActionTypeAdapter.ActionTypeViewHolder>() {
 
-    class ActionTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ActionTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private val ivImage: ImageView = itemView.findViewById(R.id.action_image)
         private val tvSum: TextView = itemView.findViewById(R.id.action_sum)
         private val tvName: TextView = itemView.findViewById(R.id.action_name)
         private val tvAmountTransactions: TextView = itemView.findViewById(R.id.transactions_amount)
         private val clParent: ConstraintLayout = itemView.findViewById(R.id.parent)
 
-        fun bind(position: Int) {
-            with(actionsList[position]) {
-                ivImage.setImageResource(this.imageResource)
-                tvSum.text = itemView.context.getText(nameResource)
-                tvName.text = sum.toString()
-                tvAmountTransactions.text = amountTransactions.toString()
-                clParent.setBackgroundColor(ResourcesCompat.getColor(itemView.resources, color, null))
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        fun bind(action: com.cashcontrol.data.room.entity.PaymentMethod) {
+            with(action) {
+//                ivImage.setImageResource(this.imageResource)
+                tvSum.text = itemView.context.getText(name.toInt())
+                tvName.text = balance.toString()
+                tvAmountTransactions.text = transactions.count().toString()
+                clParent.setBackgroundColor(
+                    ResourcesCompat.getColor(
+                        itemView.resources,
+                        R.color.purple_500,
+                        null
+                    )
+                )
             }
         }
+
+        override fun onClick(v: View?) {
+            clickCallBack.invoke(adapterPosition)
+        }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionTypeViewHolder {
         val itemView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.action_viewholder, parent, false)
+
         return ActionTypeViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ActionTypeViewHolder, position: Int) {
-        holder.bind(position % 2)
+        holder.bind(actionTypeList[position])
     }
 
-    override fun getItemCount() = Int.MAX_VALUE
+    override fun getItemCount() = actionTypeList.size
 
-    companion object {
-        val actionsList = listOf(
-            Action(ActionTypes.EXPANSES, R.string.expanses, 300, 2, R.color.purple_200, org.kodein.di.android.support.R.drawable.abc_ab_share_pack_mtrl_alpha),
-            Action(ActionTypes.INCOME, R.string.income,1200, 5,  R.color.teal_200, R.drawable.ic_launcher_foreground)
-        )
+    fun updateData(actions: List<com.cashcontrol.data.room.entity.PaymentMethod>) {
+        this.actionTypeList = actions as MutableList<com.cashcontrol.data.room.entity.PaymentMethod>
+        notifyItemRangeInserted(actionTypeList.size.dec(), actionTypeList.size + actions.size - 2)
     }
 
 }

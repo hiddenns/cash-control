@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.cashcontrol.feature.extenstion.observeOnLifecycle
+import kotlinx.coroutines.flow.Flow
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.closestDI
@@ -28,6 +30,10 @@ abstract class BaseFragment<T : ViewBinding>(
     ): View? {
         _binding = createViewBinding(layoutInflater, container, false)
         return binding.root
+    }
+
+    protected inline fun <reified T> Flow<T>.observe(noinline observer: suspend (T) -> Unit) {
+        observeOnLifecycle(viewLifecycleOwner, observer)
     }
 
 }
