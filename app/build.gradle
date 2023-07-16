@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
 
     defaultConfig {
         applicationId "com.cashcontrol"
-        minSdk 21
-        targetSdk 33
+        minSdk 26
+        targetSdk 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -44,7 +44,7 @@ android {
 dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.leanback:leanback:1.0.0'
     implementation "androidx.legacy:legacy-support-v4:$legacy_version"
@@ -54,7 +54,7 @@ dependencies {
 
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     //kodein
@@ -74,9 +74,11 @@ dependencies {
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
     // room
-    implementation 'androidx.room:room-runtime:2.5.0' // Библиотека "Room"
-    kapt "androidx.room:room-compiler:2.5.0" // Кодогенератор
-    implementation 'androidx.room:room-ktx:2.5.0' // Дополнительно для Kotlin Coroutines, Kotlin Flows
+    implementation 'androidx.room:room-runtime:2.5.2' // Библиотека "Room"
+    kapt "androidx.room:room-compiler:2.5.2" // Кодогенератор
+    implementation 'androidx.room:room-ktx:2.5.2' // Дополнительно для Kotlin Coroutines, Kotlin Flows
 
+    //Motion
+    implementation "androidx.constraintlayout:constraintlayout:2.2.0-alpha10"
 
 }

@@ -6,5 +6,5 @@ import org.kodein.di.*
 
 val ViewModelModule = DI.Module("ViewModel") {
     bindProvider { BaseViewModel() }
-    bind<MainViewModel>() with provider { MainViewModel(instance(), instance(), instance()) }
+    bind<MainViewModel>() with provider { MainViewModel(instance(), instance()) }
 }

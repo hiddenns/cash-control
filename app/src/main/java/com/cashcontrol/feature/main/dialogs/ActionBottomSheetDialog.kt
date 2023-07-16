@@ -7,10 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.cashcontrol.R
-import com.cashcontrol.data.model.Category
-import com.cashcontrol.data.model.Transaction
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import org.w3c.dom.Text
 
 class ActionBottomSheetDialog(context: Context) : BottomSheetDialog(context) {
 
@@ -34,16 +31,16 @@ class ActionBottomSheetDialog(context: Context) : BottomSheetDialog(context) {
 
 
         btnSubmit?.setOnClickListener {
-            val transaction = Transaction(
-                1,
-                "name",
-                etSum?.text.toString().toInt(),
-                213,
-                etDescription?.text.toString(),
-                -1
-            )
-            submitCallBack?.onClose(transaction)
-            clearFields()
+//            val transaction = Transaction(
+//                transactionId = "",
+//                name = "name",
+//                etSum?.text.toString().toInt(),
+//                getCurrentTimeUtc(),
+//                etDescription?.text.toString(),
+//                Category()
+//            )
+//            submitCallBack?.onClose(transaction)
+//            clearFields()
             dismiss()
         }
 

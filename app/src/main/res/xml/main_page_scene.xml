@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@id/collapse"
+        app:constraintSetStart="@id/expand"
+        app:motionInterpolator="easeInOut">
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@id/rv" />
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="70"
+                motion:motionTarget="@id/tv_income" />
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="70"
+                motion:motionTarget="@id/tv_expanse" />
+
+            <KeyAttribute
+                android:alpha="0.5"
+                motion:framePosition="10"
+                motion:motionTarget="@id/rg_filter_picker" />
+
+            <KeyAttribute
+                android:translationX="0dp"
+                motion:framePosition="25"
+                motion:motionTarget="@id/ll_wallet_info" />
+
+            <KeyAttribute
+                android:translationX="130dp"
+                motion:framePosition="55"
+                motion:motionTarget="@id/ll_wallet_info" />
+
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/expand">
+
+        <Constraint
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/tv_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="1"
+            motion:layout_constraintStart_toStartOf="@id/tv_balance"
+            motion:layout_constraintTop_toBottomOf="@id/tv_balance" />
+
+        <Constraint
+            android:id="@+id/tv_expanse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:alpha="1"
+            motion:layout_constraintStart_toStartOf="@id/tv_balance"
+            motion:layout_constraintTop_toBottomOf="@id/tv_income" />
+
+        <Constraint
+            android:id="@+id/gl"
+            android:layout_marginTop="200dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/ll_wallet_info" />
+
+        <Constraint
+            android:id="@+id/rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/gl" />
+
+        <Constraint
+            android:id="@+id/background_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/ll_wallet_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/tv_balance"
+            motion:layout_constraintTop_toTopOf="@id/tv_balance" />
+
+        <Constraint
+            android:id="@+id/rg_filter_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="1"
+            app:layout_constraintBottom_toBottomOf="@id/gl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/collapse">
+
+        <Constraint
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Transform
+                android:scaleX=".65"
+                android:scaleY=".65" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/tv_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="@id/tv_balance"
+            motion:layout_constraintStart_toStartOf="@id/tv_balance"
+            motion:layout_constraintTop_toBottomOf="@id/tv_balance" />
+
+        <Constraint
+            android:id="@+id/tv_expanse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="@id/tv_balance"
+            motion:layout_constraintStart_toStartOf="@id/tv_balance"
+            motion:layout_constraintTop_toBottomOf="@id/tv_income" />
+
+        <Constraint
+            android:id="@+id/gl"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/tv_balance" />
+
+        <Constraint
+            android:id="@+id/rg_filter_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:alpha="0"
+            android:layout_marginTop="16dp"
+            android:translationY="50dp"
+            app:layout_constraintTop_toTopOf="@id/rv" />
+
+        <Constraint
+            android:id="@id/ll_wallet_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="parent" />
+
+    </ConstraintSet>
+
+</MotionScene>

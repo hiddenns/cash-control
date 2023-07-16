@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cashcontrol.R
 
 class ActionTypeAdapter(
-    private var actionTypeList: MutableList<com.cashcontrol.data.room.entity.PaymentMethod>,
+    private var actionTypeList: MutableList<com.cashcontrol.data.room.entity.Wallet>,
     private val clickCallBack: (position: Int) -> Unit
 ) : RecyclerView.Adapter<ActionTypeAdapter.ActionTypeViewHolder>() {
 
@@ -26,12 +26,11 @@ class ActionTypeAdapter(
             itemView.setOnClickListener(this)
         }
 
-        fun bind(action: com.cashcontrol.data.room.entity.PaymentMethod) {
+        fun bind(action: com.cashcontrol.data.room.entity.Wallet) {
             with(action) {
 //                ivImage.setImageResource(this.imageResource)
                 tvSum.text = itemView.context.getText(name.toInt())
                 tvName.text = balance.toString()
-                tvAmountTransactions.text = transactions.count().toString()
                 clParent.setBackgroundColor(
                     ResourcesCompat.getColor(
                         itemView.resources,
@@ -63,8 +62,8 @@ class ActionTypeAdapter(
 
     override fun getItemCount() = actionTypeList.size
 
-    fun updateData(actions: List<com.cashcontrol.data.room.entity.PaymentMethod>) {
-        this.actionTypeList = actions as MutableList<com.cashcontrol.data.room.entity.PaymentMethod>
+    fun updateData(actions: List<com.cashcontrol.data.room.entity.Wallet>) {
+        this.actionTypeList = actions as MutableList<com.cashcontrol.data.room.entity.Wallet>
         notifyItemRangeInserted(actionTypeList.size.dec(), actionTypeList.size + actions.size - 2)
     }
 

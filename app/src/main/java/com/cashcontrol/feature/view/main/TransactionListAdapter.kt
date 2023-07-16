@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cashcontrol.R
-import com.cashcontrol.data.model.Category
 import com.cashcontrol.data.model.Transaction
 
 class TransactionListAdapter(private val list: MutableList<Transaction>) :
@@ -32,7 +31,7 @@ class TransactionListAdapter(private val list: MutableList<Transaction>) :
     }
 
     class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val text: TextView = itemView.findViewById(R.id.textVh)
+        val text: TextView = itemView.findViewById(R.id.tv_title)
     }
 
 }

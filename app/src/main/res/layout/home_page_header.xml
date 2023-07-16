@@ -1,0 +1,51 @@
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
+    app:layoutDescription="@xml/main_page_header_scene"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:showPaths="false"
+    android:background="#1e376b">
+
+    <TextView
+        android:id="@+id/tv_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10 234$"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp" />
+
+    <TextView
+        android:id="@+id/tv_income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14 934$"
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tv_expanse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8 034$"
+        android:textColor="#FFF"
+        android:textSize="18sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_income"
+        style="@style/ShapeAppearance.Material3.Corner.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/income"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_expanse"
+        style="@style/ShapeAppearance.Material3.Corner.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/expanses"/>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

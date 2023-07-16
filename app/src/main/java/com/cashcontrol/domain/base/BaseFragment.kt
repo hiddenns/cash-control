@@ -36,6 +36,11 @@ abstract class BaseFragment<T : ViewBinding>(
         observeOnLifecycle(viewLifecycleOwner, observer)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
 
 

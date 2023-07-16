@@ -1,11 +1,12 @@
 package com.cashcontrol.domain.repositories.transactions
 
 import com.cashcontrol.data.model.Transaction
+import kotlinx.coroutines.flow.Flow
 
-interface TransactionsRepository {
+interface ITransactionsRepository {
 
-    fun getAllTransactions(categoryId: Long = DEFAULT_CATEGORY_ID) : List<Transaction>
-    fun addTransaction(transaction: Transaction): Transaction
+    fun getAllTransactions(categoryId: Long = DEFAULT_CATEGORY_ID) : Flow<List<Transaction>>
+    fun addTransaction(transaction: Transaction)
     fun removeTransaction(categoryId: Long): Transaction
 
 
