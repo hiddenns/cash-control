@@ -5,4 +5,7 @@
     <string name="settings">Ajustes</string>
     <string name="statistics">Estadísticas</string>
     <string name="add">Agregar</string>
+
+    <string name="transport">Транспорт</string>
+    <string name="food">Їжа</string>
 </resources>

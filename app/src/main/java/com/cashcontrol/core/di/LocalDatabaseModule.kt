@@ -20,7 +20,7 @@ fun localDatabase(app: Application) = DI.Module("Local-Database") {
             app.applicationContext,
             AppDatabase::class.java, "cashcontrol-database"
         )
-            .addCallback(AppDatabase.CALLBACK)
+            .addCallback(AppDatabase.getCallBack(app.applicationContext))
             //.addTypeConverter(DefaultConverter(GsonParser(Gson())))
             .build()
     }

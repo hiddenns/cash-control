@@ -10,7 +10,7 @@ import org.kodein.di.android.closestDI
 
 
 class MainActivity : AppCompatActivity(), DIAware {
-    protected lateinit var binding: ActivityMainBinding
+    private var binding: ActivityMainBinding? = null
 
     override val di: DI by closestDI()
 
@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity(), DIAware {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
-        with(binding.viewPager) {
+        with(binding!!.viewPager) {
             adapter = PagerAdapter(this@MainActivity)
             setCurrentItem(1, false)
         }

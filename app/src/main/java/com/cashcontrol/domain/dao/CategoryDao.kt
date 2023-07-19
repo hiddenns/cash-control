@@ -24,4 +24,7 @@ interface CategoryDao {
     @Delete
     fun delete(category: Category)
 
+    @Query("SELECT * FROM category WHERE categoryId = :categoryId")
+    fun getById(categoryId: Long): Category
+
 }

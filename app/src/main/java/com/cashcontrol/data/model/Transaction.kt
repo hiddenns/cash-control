@@ -6,7 +6,7 @@ data class Transaction(
     var sum: Int = 0,
     var date: Long = 0,
     var description: String = "",
-    var categoryId: Long = -1,
+    var category: Category,
     var walletId: Long = -1,
     var type: ActionType = ActionType.EXPENSE
 )

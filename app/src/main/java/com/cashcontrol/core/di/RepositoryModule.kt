@@ -8,5 +8,5 @@ import org.kodein.di.instance
 
 val RepositoryModule = DI.Module("Repository") {
     bindProvider { CategoriesRepositoryImpl(instance()) }
-    bindProvider { TransactionsRepositoryImpl(instance()) }
+    bindProvider { TransactionsRepositoryImpl(instance(), instance()) }
 }

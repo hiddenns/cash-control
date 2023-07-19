@@ -1,55 +1,114 @@
 package com.cashcontrol.feature.main.dialogs
 
-import android.content.Context
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.cashcontrol.R
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.cashcontrol.data.model.Category
+import com.cashcontrol.data.model.Transaction
+import com.cashcontrol.databinding.ActionDialogBinding
+import com.cashcontrol.feature.util.getCurrentTimeUtc
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
+import kotlin.random.Random
 
-class ActionBottomSheetDialog(context: Context) : BottomSheetDialog(context) {
+class ActionBottomSheetDialog : BottomSheetDialogFragment(R.layout.action_dialog), DIAware {
 
+    private var _binding: ActionDialogBinding? = null
+    private val binding: ActionDialogBinding
+        get() = _binding!!
 
-    var submitCallBack: ActionDialogSubmitCallBack? = null
-    var etSum = findViewById<EditText>(R.id.et_enter_sum)
-    var etDescription = findViewById<EditText>(R.id.et_enter_description)
-    var category = null
-    var tvTitle = findViewById<TextView>(R.id.tv_title)
-    var btnSubmit = findViewById<Button>(R.id.btn_transaction_confirm)
-    var parent = findViewById<ConstraintLayout>(R.id.action_dialog_parent)
+    override val di: DI by closestDI()
+
+    override fun getTheme() = R.style.CustomBottomSheetDialog
+
+    private val categoryItemsAdapter = CategoryItemsAdapter(emptyList())
+
+    private val viewModel: ActionDialogViewModel by instance()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = ActionDialogBinding.inflate(layoutInflater)
+        return _binding!!.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        etSum = findViewById(R.id.et_enter_sum)
-        etDescription = findViewById(R.id.et_enter_description)
-        btnSubmit = findViewById(R.id.btn_transaction_confirm)
-        tvTitle = findViewById(R.id.tv_title)
-        parent = findViewById(R.id.action_dialog_parent)
-
-
-        btnSubmit?.setOnClickListener {
-//            val transaction = Transaction(
-//                transactionId = "",
-//                name = "name",
-//                etSum?.text.toString().toInt(),
-//                getCurrentTimeUtc(),
-//                etDescription?.text.toString(),
-//                Category()
-//            )
-//            submitCallBack?.onClose(transaction)
-//            clearFields()
-            dismiss()
-        }
-
-
+        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialog)
+        _binding = ActionDialogBinding.inflate(layoutInflater)
     }
 
-    private fun clearFields() {
-        etSum?.text?.clear()
-        etDescription?.text?.clear()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupListeners()
+        setupObservers()
+        setupViews()
+    }
+
+    private fun setupViews() {
+        with(binding) {
+            rvCategories.adapter = categoryItemsAdapter
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupObservers() {
+        with(viewModel) {
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.CREATED) {
+                    categories.collectLatest { list ->
+                        categoryItemsAdapter.submit(list)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupListeners() {
+        with(binding) {
+            btnSubmit.setOnClickListener {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val newTransaction = Transaction(
+                        category = viewModel.categories.firstOrNull()?.get(0) ?: Category(),
+                        sum = Integer.parseInt(binding.etSum.text.toString()),
+                        date = getCurrentTimeUtc(),
+                        description = etDescription.text.toString(),
+                        transactionId = Random(43).nextInt()
+                    )
+
+                    viewModel.addTransaction(newTransaction)
+                }
+                dismiss()
+            }
+        }
+    }
+
+    companion object {
+
+        const val TAG = "ACTION_DIALOG"
+        fun show(fragmentManager: FragmentManager): ActionBottomSheetDialog {
+            val dialog = ActionBottomSheetDialog()
+            dialog.show(fragmentManager, TAG)
+            return dialog
+        }
     }
 
 }

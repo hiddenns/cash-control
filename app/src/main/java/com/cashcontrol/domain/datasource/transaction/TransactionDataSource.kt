@@ -16,4 +16,6 @@ class TransactionDataSource(database: AppDatabase) : BaseDataSource(), ITransact
     override fun addTransaction(transaction: Transaction) = transactionDao.insert(transaction)
 
     override fun getAllTransactions() = transactionDao.getAll()
+
+    override fun getAllByCategoryId(categoryId: Long) = transactionDao.getAllByCategory(categoryId)
 }

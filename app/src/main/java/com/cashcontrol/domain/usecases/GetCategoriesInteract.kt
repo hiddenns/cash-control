@@ -1,6 +1,6 @@
 package com.cashcontrol.domain.usecases
 
-import com.cashcontrol.data.room.entity.Category
+import com.cashcontrol.data.model.Category
 import com.cashcontrol.domain.repositories.categories.ICategoriesRepository
 
 class GetCategoriesInteract(

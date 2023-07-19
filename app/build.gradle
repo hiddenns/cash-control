@@ -81,4 +81,7 @@ dependencies {
     //Motion
     implementation "androidx.constraintlayout:constraintlayout:2.2.0-alpha10"
 
+    //AnyCharts
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
 }

@@ -7,10 +7,20 @@ import com.cashcontrol.data.model.ActionType
 
 @Entity
 data class Category(
-    @PrimaryKey(autoGenerate = true) val categoryId: Long = -1,
+    @PrimaryKey(autoGenerate = true) var categoryId: Long = -1,
     @ColumnInfo(name = "name") var name: String = "",
-    @ColumnInfo(name = "sum") val sum: Long = 0,
-    @ColumnInfo(name = "imageSource") val imageSource: String = "",
-    @ColumnInfo(name = "type") val type: ActionType = ActionType.EXPENSE,
-    @ColumnInfo(name = "color") val color: Int = -1
+    @ColumnInfo(name = "sum") var sum: Long = 0,
+    @ColumnInfo(name = "imageSource") var imageSource: Int = -1,
+    @ColumnInfo(name = "type") var type: ActionType = ActionType.EXPENSE,
+    @ColumnInfo(name = "color") var color: Int = -1
 )
+
+fun Category.toModel() =
+    com.cashcontrol.data.model.Category().apply {
+        this.sum = this@toModel.sum
+        this.type = this@toModel.type
+        this.color = this@toModel.color
+        this.name = this@toModel.name
+        this.imageSource = this@toModel.imageSource
+        this.categoryId = this@toModel.categoryId
+    }

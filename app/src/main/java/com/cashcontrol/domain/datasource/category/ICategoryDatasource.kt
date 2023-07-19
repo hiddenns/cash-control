@@ -8,5 +8,6 @@ interface ICategoryDatasource {
     fun addCategory(category: Category)
 
     fun getAllCategories(): Flow<List<Category>>
+    fun getCategoryById(categoryId: Long): Category
 
 }

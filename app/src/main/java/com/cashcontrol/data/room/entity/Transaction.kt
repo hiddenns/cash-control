@@ -8,7 +8,7 @@ import com.cashcontrol.data.model.ActionType
 @Entity
 data class Transaction(
     @PrimaryKey(autoGenerate = true)
-    var transactionId: Int = -1,
+    var transactionId: Int? = null,
     @ColumnInfo var name: String = "",
     @ColumnInfo var sum: Int = 0,
     @ColumnInfo var date: Long = 0,
