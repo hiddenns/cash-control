@@ -8,4 +8,17 @@
 
     <string name="transport">Transport</string>
     <string name="food">Food</string>
+    <string name="house">House</string>
+    <string name="gifts">Gifts</string>
+    <string name="communications">Communications</string>
+    <string name="pets">Pets</string>
+    <string name="health">Health</string>
+    <string name="clothes">Clothes</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="bills">Bills</string>
+    <string name="car">Car</string>
+
+    <string name="salary">Salary</string>
+    <string name="deposits">Deposits</string>
+    <string name="savings">Savings</string>
 </resources>

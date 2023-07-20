@@ -6,6 +6,19 @@
     <string name="statistics">Estadísticas</string>
     <string name="add">Agregar</string>
 
-    <string name="transport">Транспорт</string>
-    <string name="food">Їжа</string>
+    <string name="transport">Transporte</string>
+    <string name="food">Comida</string>
+    <string name="house">Inicio</string>
+    <string name="gifts">Regalos</string>
+    <string name="communications">Comunicación</string>
+    <string name="pets">Mascotas</string>
+    <string name="health">Salud</string>
+    <string name="clothes">Ropa</string>
+    <string name="entertainment">Entretenimiento</string>
+    <string name="bills">Cuentas</string>
+    <string name="car">Coche</string>
+
+    <string name="salary">Salario</string>
+    <string name="deposits">Depósito</string>
+    <string name="savings">Conservación</string>
 </resources>

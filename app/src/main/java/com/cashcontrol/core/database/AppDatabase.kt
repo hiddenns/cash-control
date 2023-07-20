@@ -31,12 +31,6 @@ abstract class AppDatabase : RoomDatabase() {
                 DefaultDatabaseConfig.getCategoriesDefault(context).forEach { category ->
                     db.execSQL(insertDefaultCategory(category))
                 }
-//
-//                db.execSQL("INSERT INTO CATEGORY (sum, name, imageSource, type, color) VALUES (0, 'Food', '', 'EXPANSES', 0)")
-//                db.execSQL("INSERT INTO CATEGORY (sum, name, imageSource, type, color) VALUES (0, 'Sport', '', 'EXPANSES', 0)")
-//                db.execSQL("INSERT INTO CATEGORY (sum, name, imageSource, type, color) VALUES (0, 'House', '', 'EXPANSES', 0)")
-//                db.execSQL("INSERT INTO CATEGORY (sum, name, imageSource, type, color) VALUES (0, 'Entertainment', '', 'EXPANSES', 0)")
-//                db.execSQL("INSERT INTO CATEGORY (sum, name, imageSource, type, color) VALUES (0, 'Transport', '', 'EXPANSES', 0)")
             }
         }
 

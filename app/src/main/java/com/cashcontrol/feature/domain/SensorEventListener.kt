@@ -22,7 +22,7 @@ class SensorEventListener(
         currentAcceleration = sqrt(x * x + y * y + z * z)
         val delta: Float = currentAcceleration - lastAcceleration
         acceleration = acceleration * 0.9f + delta
-        if (acceleration > 15) {
+        if (acceleration > 13) {
             callback.invoke()
         }
     }
