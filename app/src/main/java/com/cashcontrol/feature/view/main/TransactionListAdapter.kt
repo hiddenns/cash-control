@@ -2,10 +2,13 @@ package com.cashcontrol.feature.view.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.cashcontrol.R
+import com.cashcontrol.data.model.ActionType
 import com.cashcontrol.data.model.Transaction
 import com.cashcontrol.databinding.ViewHolderTransactionBinding
+import com.cashcontrol.feature.extenstion.getImageDrawableByIdentifier
 
 class TransactionListAdapter(private val list: MutableList<Transaction>) :
     RecyclerView.Adapter<TransactionListAdapter.TransactionViewHolder>() {
@@ -29,14 +32,23 @@ class TransactionListAdapter(private val list: MutableList<Transaction>) :
         notifyDataSetChanged()
     }
 
-    class TransactionViewHolder(val binding: ViewHolderTransactionBinding) :
+    class TransactionViewHolder(private val binding: ViewHolderTransactionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Transaction) {
             with(binding) {
+                when (item.category.type) {
+                    ActionType.INCOME -> {
+                        tvSum.setTextColor(ContextCompat.getColor(itemView.context, R.color.aqua))
+                    }
+                    ActionType.EXPENSE -> {
+                        tvSum.setTextColor(ContextCompat.getColor(itemView.context, R.color.pink))
+                    }
+                }
+
                 tvTitle.text = item.description
                 tvSum.text = "${item.sum} $"
-                ivIcon.background = ResourcesCompat.getDrawable(itemView.resources, item.category.imageSource,null)
+                ivIcon.background = itemView.context.getImageDrawableByIdentifier(item.category.imageSource)
             }
         }
     }

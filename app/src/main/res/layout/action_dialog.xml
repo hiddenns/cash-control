@@ -17,6 +17,7 @@
         android:text="10 December"
         android:textAlignment="textEnd"
         android:textColor="@color/main_white"
+        android:visibility="gone"
         app:drawableEndCompat="@drawable/icon_calendar_minimalistic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,83 +28,146 @@
         android:id="@+id/btn_card_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:src="@drawable/icon_violet_credit_card"
-        app:layout_constraintBottom_toBottomOf="@id/et_sum"
-        app:layout_constraintEnd_toStartOf="@id/et_sum"
-        app:layout_constraintTop_toTopOf="@id/et_sum" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_sum"
+        app:layout_constraintEnd_toStartOf="@id/tv_sum"
+        app:layout_constraintTop_toTopOf="@id/tv_sum" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+
+    <EditText
         android:id="@+id/et_sum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        app:layout_constraintStart_toStartOf="@id/tv_sum"
+        app:layout_constraintEnd_toEndOf="@id/tv_sum"
+        app:layout_constraintTop_toTopOf="@id/tv_sum"
+        android:alpha="0"
+        android:translationZ="2dp"
+        tools:text="231"
+        android:maxLength="9"
+        android:padding="16dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sum"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Enter sum"
-        android:inputType="number"
+        android:text="0"
         android:textColor="@color/main_white"
-        android:textColorHint="@color/main_white"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_calendar_picker" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/iv_currency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_calendar"
-        app:layout_constraintBottom_toBottomOf="@id/et_sum"
-        app:layout_constraintStart_toEndOf="@id/et_sum"
-        app:layout_constraintTop_toTopOf="@id/et_sum" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Short Description"
-        android:textColor="@color/main_white"
-        android:textColorHint="@color/main_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_sum" />
-
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_action_type"
+        android:id="@+id/tv_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/expanses"
+        android:layout_margin="4dp"
+        android:textAlignment="textEnd"
         android:textColor="@color/main_white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_sum"
+        app:layout_constraintStart_toEndOf="@id/tv_sum"
+        app:layout_constraintTop_toTopOf="@id/tv_sum"
+        tools:text="$" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_description"
+        style="@style/CustomInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        android:layout_marginTop="16dp"
+        app:counterTextColor="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_description" />
+        app:layout_constraintTop_toBottomOf="@id/tv_sum">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/short_description"
+            android:maxLength="20"
+            android:textColor="@color/main_white"
+            tools:text="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_filter_picker"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="16dp"
+        android:background="@drawable/pink_outliine"
+        android:checkedButton="@+id/rb_expanse"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_description">
+
+
+        <RadioButton
+            android:id="@+id/rb_expanse"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_toggle_widget"
+            android:button="@null"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/expanses"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rb_income"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_toggle_widget"
+            android:button="@null"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/income"
+            android:textColor="@color/white" />
+    </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_categories"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:useDefaultMargins="true"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_action_type"
+        app:layout_constraintTop_toBottomOf="@id/rg_filter_picker"
         app:spanCount="3"
-        tools:listitem="@layout/category_holder" />
+        tools:spanCount="3" />
 
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
-        style="@style/ShapeAppearance.Material3.MediumComponent"
+        style="@style/ThemeOverlay.Material3.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:backgroundTint="@color/violet"
         android:text="@string/add"
+        android:textColor="@color/main_white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_categories" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,14 @@
     <string name="settings">Налаштування</string>
     <string name="statistics">Статистика</string>
     <string name="add">Додати</string>
+    <string name="short_description">Короткий опис</string>
 
     <string name="transport">Транспорт</string>
     <string name="food">Їжа</string>
     <string name="house">Дім</string>
     <string name="gifts">Подарунки</string>
     <string name="communications">Комунікація</string>
-    <string name="pets">Домашні улюбленці</string>
+    <string name="pets">Домашні \nулюбленці</string>
     <string name="health">Здоров\'я</string>
     <string name="clothes">Одяг</string>
     <string name="entertainment">Розваги</string>
@@ -20,7 +21,7 @@
 
     <string name="salary">Зарплатня</string>
     <string name="deposits">Депозит</string>
-    <string name="savings">Збереження</string>
+    <string name="savings">Збереження</string>\
 
 
 </resources>

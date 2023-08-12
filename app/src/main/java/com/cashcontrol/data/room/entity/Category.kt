@@ -10,7 +10,7 @@ data class Category(
     @PrimaryKey(autoGenerate = true) var categoryId: Long = -1,
     @ColumnInfo(name = "name") var name: String = "",
     @ColumnInfo(name = "sum") var sum: Long = 0,
-    @ColumnInfo(name = "imageSource") var imageSource: Int = -1,
+    @ColumnInfo(name = "imageSource") var imageSource: String = "",
     @ColumnInfo(name = "type") var type: ActionType = ActionType.EXPENSE,
     @ColumnInfo(name = "color") var color: Int = -1
 )

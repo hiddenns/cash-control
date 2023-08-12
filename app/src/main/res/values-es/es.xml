@@ -5,6 +5,7 @@
     <string name="settings">Ajustes</string>
     <string name="statistics">Estadísticas</string>
     <string name="add">Agregar</string>
+    <string name="short_description">Breve descripción</string>
 
     <string name="transport">Transporte</string>
     <string name="food">Comida</string>

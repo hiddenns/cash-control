@@ -36,7 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun insertDefaultCategory(item: Category) =
             "INSERT INTO CATEGORY (sum, name, imageSource, type, color) " +
-                    "VALUES (${item.sum}, '${item.name}', ${item.imageSource}, '${item.type}', ${item.color})"
+                    "VALUES (${item.sum}, '${item.name}', '${item.imageSource}', '${item.type}', ${item.color})"
     }
 
 

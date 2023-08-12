@@ -6,7 +6,7 @@ data class Category(
     var categoryId: Long = -1,
     var name: String = "",
     var sum: Long = 0,
-    var imageSource: Int = -1,
+    var imageSource: String = "",
     var type: ActionType = ActionType.EXPENSE,
     var color: Int = -1
 )

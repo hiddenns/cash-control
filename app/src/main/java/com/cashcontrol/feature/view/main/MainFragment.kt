@@ -51,6 +51,22 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
                 transactionListAdapter.updateData(data)
             }
 
+            event.observe { state ->
+                when (state) {
+                    is MainViewModel.Event.SelectCategoriesFilter -> {
+                        setEvent(MainViewModel.Event.SelectCategoriesFilter)
+                    }
+
+                    is MainViewModel.Event.SelectTransactionsFilter -> {
+                        setEvent(MainViewModel.Event.SelectTransactionsFilter)
+                    }
+
+                    else -> {}
+                }
+            }
+
+
+
         }
     }
 
@@ -58,6 +74,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         with(binding) {
             btnWalletPicker.setOnClickListener {
                 callActionDialog()
+            }
+            rbTransaction.setOnClickListener {
+                viewModel.setEvent(MainViewModel.Event.SelectTransactionsFilter)
+            }
+            rbCategories.setOnClickListener {
+                viewModel.setEvent(MainViewModel.Event.SelectCategoriesFilter)
             }
         }
     }

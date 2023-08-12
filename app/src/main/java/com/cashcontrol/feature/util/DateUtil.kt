@@ -8,6 +8,7 @@ import java.util.Date
 import java.util.Locale
 
 fun getDefaultDateFormat() = "yyyy/MM/dd HH:mm:ss"
+fun getFullDateFormat() = "dd.MM.yyyy"
 
 fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
     val formatter = SimpleDateFormat(format, locale)

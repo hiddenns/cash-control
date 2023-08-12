@@ -32,4 +32,12 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
+
+    <style name="CustomInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+       <item name="hintTextColor">@color/violet</item>
+       <item name="android:textColorHint">@color/main_white</item>
+       <item name="boxStrokeColor">@color/violet</item>
+       <item name="boxStrokeWidth">2dp</item>
+       <item name="colorPrimary">@color/violet</item>
+    </style>
 </resources>

@@ -115,7 +115,7 @@
             android:textColor="@color/white" />
 
         <RadioButton
-            android:id="@+id/categories"
+            android:id="@+id/rb_categories"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
